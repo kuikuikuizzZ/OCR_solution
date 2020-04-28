@@ -25,4 +25,6 @@ _C.model_cfg.detector = CN(dict( canvas_size=768,
                 )
 _C.model_cfg.adapter = CN()
 
+_C.return_coordinates=False
+
 cfg=_C

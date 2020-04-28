@@ -1,4 +1,5 @@
 import cv2
+import json
 import numpy as np
 
 from .adapter import RRect2FixHeightAdapter
@@ -38,4 +39,4 @@ class ONNXCraftDensenetSpotter(object):
             self.recognizer.predict_batch(test_sample)
         except Exception as e:
             raise e
-        return "ok model is healthy"
+        return json.dumps({"modelStatus": "ready"})

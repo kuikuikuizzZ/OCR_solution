@@ -85,12 +85,16 @@ class Inference(Resource):
         target_regions = list()
         for key,item in mapping_dict.items():
             outArr,text = item
-            coordinates = N42Arr2Coordinates(outArr)
-            compose_item = dict(name=key,
-                                coordinates=coordinates,
-                                text=text)
+            if self.config.return_coordinates:
+                coordinates = N42Arr2Coordinates(outArr)
+                compose_item = dict(name=key,
+                                    coordinates=coordinates,
+                                    text=text)
+            else:
+                compose_item = dict(name=key,
+                                    text=text)
             target_regions.append(compose_item)
-        return dict(solution=dict(target_regions=target_regions))
+        return dict(solution=dict(results=target_regions))
 
 def coordinates2boxes(coord_list):
     boxes = []
