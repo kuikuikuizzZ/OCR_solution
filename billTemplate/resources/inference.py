@@ -109,7 +109,7 @@ def collectCoord(boxDictList):
     return resultDict
 
 def N42Arr2Coordinates(outArray):
-    coord_list = np.around(outArray).astype(np.int).tolist()
+    coord_list = np.around(outArray).astype(np.int64).tolist()
     coordinates = list()
     for x,y in coord_list:
         coordinates.append(dict(x=x,y=y))

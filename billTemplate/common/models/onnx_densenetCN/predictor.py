@@ -43,11 +43,12 @@ class ONNXDensenetRecognizer(object):
     def _batch_input(self,img_list):
         height = self.config['height']
         width = self.config['width']
-        batch  = self.config['batch_size']
+        batch  = int(self.config['batch_size'])
         if self.config['device'] == 'gpu':
             img_batch = np.ones([batch,height,width,1],np.float32)*0.5
-            if len(img_list) > batch:
-                batch = np.exp2(np.ceil(np.log2(img_list/batch)))*batch
+            length_imgs =  len(img_list)
+            if length_imgs > batch:
+                batch = batch << (length_imgs//batch)
                 self.config['batch_size'] = batch
         elif self.config['device'] == 'cpu':
             batch  = len(img_list)
@@ -75,6 +76,6 @@ def _decode(pred):
 
 def _normalize(img):
     img_L = img.astype(np.float32)
-    img_L = img_L[:,:,0]*114/1000 + img_L[:,:,1]* 587/1000 + img_L[:,:,2]* 299/1000 
+    img_L = img_L[:,:,0]*0.114 + img_L[:,:,1]* 0.587 + img_L[:,:,2]* 0.299 
     img_L = img_L/ 255.0 - 0.5
     return img_L

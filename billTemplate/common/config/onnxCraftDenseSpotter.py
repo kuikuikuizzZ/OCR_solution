@@ -16,7 +16,9 @@ _C.model_cfg.recognizer = CN(dict(height=32,
                                output_name=['y_pred/truediv:0'],
                                device='cpu')
                   )
-_C.model_cfg.detector = CN(dict( canvas_size=768,
+_C.model_cfg.detector = CN(dict(input_name = ['actual_input_1'],
+                                output_name=['output1'],
+                                canvas_size=768,
                                 mag_ratio = 0.8,
                                 text_threshold = 0.7,
                                 link_threshold = 0.4,

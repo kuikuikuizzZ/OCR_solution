@@ -32,7 +32,6 @@ class ONNXCraft(object):
         x = imgproc.normalizeMeanVariance(img_resized)
         x = x.transpose(2, 0, 1)    # [h, w, c] to [c, h, w]
         x = np.expand_dims(x,axis=0)                # [c, h, w] to [b, c, h, w]
-        x = x
         # forward pass
         y = self._predict(x)
         y = y[0]
@@ -53,4 +52,5 @@ class ONNXCraft(object):
         return boxes
 
     def _predict(self,batch_input):
-        return  self.sess.run(['output1'],{'actual_input_1':batch_input})
+        return  self.sess.run(self.config['output_name'],
+                              {self.config['input_name'][0]:batch_input})

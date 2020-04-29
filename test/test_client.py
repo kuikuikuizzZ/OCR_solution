@@ -1,6 +1,6 @@
 import requests
 import json
-import pprint
+
 if __name__ == '__main__':
     with open("../sample/invoice_solution/0.json") as f:
         solution_dict = json.load(f)
@@ -10,8 +10,7 @@ if __name__ == '__main__':
     r = requests.post('http://0.0.0.0:9001/api/v1alpha1/inference',
         files=files,data=data)
     content = json.loads(r.content,encoding='utf-8')
-    pprint.pprint(content)
-    
-    r = requests.get('http://0.0.0.0:9001/api/v1alpha1/status',)
-    content = json.loads(r.content,encoding='utf-8')
-    pprint.pprint(content)
+    print(content)
+
+    r = requests.get('http://0.0.0.0:9001/api/v1alpha1/healthful',)
+    print(r.content)
