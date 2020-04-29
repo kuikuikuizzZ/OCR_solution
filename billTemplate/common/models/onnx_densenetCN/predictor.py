@@ -45,10 +45,9 @@ class ONNXDensenetRecognizer(object):
         width = self.config['width']
         batch  = int(self.config['batch_size'])
         if self.config['device'] == 'gpu':
-            img_batch = np.ones([batch,height,width,1],np.float32)*0.5
             length_imgs =  len(img_list)
             if length_imgs > batch:
-                batch = batch << (length_imgs//batch)
+                batch = 2<<(int(np.log2(length_imgs)))
                 self.config['batch_size'] = batch
         elif self.config['device'] == 'cpu':
             batch  = len(img_list)

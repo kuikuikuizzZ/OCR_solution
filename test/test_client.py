@@ -12,5 +12,5 @@ if __name__ == '__main__':
     content = json.loads(r.content,encoding='utf-8')
     print(content)
 
-    r = requests.get('http://0.0.0.0:9001/api/v1alpha1/healthful',)
+    r = requests.get('http://0.0.0.0:9001/api/v1alpha1/status',)
     print(r.content)
