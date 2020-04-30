@@ -75,8 +75,8 @@ class Inference(Resource):
             customTemplateOCR=config['customTemplateOCR']
             references = customTemplateOCR['references']
             targets = customTemplateOCR['targets']
-            refer_dict = collectCoord(references)
-            target_dict = collectCoord(targets)
+            refer_dict = self.collectCoord(references)
+            target_dict = self.collectCoord(targets)
         except KeyError :
             raise KeyError('references or targets info is invalid')
         return refer_dict,target_dict
@@ -96,17 +96,26 @@ class Inference(Resource):
             target_regions.append(compose_item)
         return dict(solution=dict(results=target_regions))
 
-def coordinates2boxes(coord_list):
-    boxes = []
-    for item in coord_list:
-        boxes.extend([int(item['x']),int(item['y'])])
-    return boxes
+    def coordinates2box(self,coord_list):
+        boxes = []
+        for item in coord_list:
+            boxes.extend([int(item['x']),int(item['y'])])
+        if self.config['in_shape_type']=='rect':
+            boxes = self.regular_rect(boxes)
+        return boxes
 
-def collectCoord(boxDictList):
-    resultDict = dict()
-    for boxDict in boxDictList:
-        resultDict[boxDict['name']]=coordinates2boxes(boxDict['coordinates'])
-    return resultDict
+    def regular_rect(self,boxes):
+        x1 = min(boxes[::2])
+        x2 = max(boxes[::2])
+        y1 = min(boxes[1::2])
+        y2 = max(boxes[1::2])
+        return [x1,y1,x2,y1,x2,y2,x1,y2]
+
+    def collectCoord(self,boxDictList):
+        resultDict = dict()
+        for boxDict in boxDictList:
+            resultDict[boxDict['name']]=self.coordinates2box(boxDict['coordinates'])
+        return resultDict
 
 def N42Arr2Coordinates(outArray):
     coord_list = np.around(outArray).astype(np.int64).tolist()

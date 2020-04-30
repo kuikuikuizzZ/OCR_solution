@@ -15,7 +15,7 @@ class Mapping(object):
 
 
 class TextBoxesMapping(Mapping):
-    def __init__(self, target_type='N8', pred_type='N42', iou_thresh=0.2):
+    def __init__(self, target_type='N8', pred_type='N42', iou_thresh=0.1):
         self.target_type = target_type
         self.pred_type = pred_type
         self.iou_thresh = iou_thresh

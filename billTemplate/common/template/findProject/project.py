@@ -7,7 +7,7 @@ from ..utils.boxes import REGION_TYPE
 defultConfig = CN()
 defultConfig.type = 'center'
 defultConfig.project = CN()
-defultConfig.project.HOMOGRAPHY_THRESHOLD = 6
+defultConfig.project.HOMOGRAPHY_THRESHOLD = 8
 
 
 class Project(object):
