@@ -2,6 +2,7 @@ import re
 from copy import deepcopy
 from itertools import combinations
 
+
 def match(matcherList, predictText):
     '''
     matcherList: a list of matcherDict
@@ -61,6 +62,7 @@ class CharMatcher(Matcher):
                 matchDict[key] = matchList
         return matchDict
 
+
 def generatePattern(text, level=3, blank='.*'):
     length = len(text)
     subLength = length - length // level
@@ -79,6 +81,7 @@ def matchSubPatterns(subPatterns, predictText, limitMatchNum=2):
         if match is not None and len(matchList) < limitMatchNum:
             matchList.append(i)
     return matchList
+
 
 def computeCombinations(matchedDict):
     '''compute all possible combinations'''

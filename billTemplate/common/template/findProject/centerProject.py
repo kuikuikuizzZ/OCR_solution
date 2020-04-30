@@ -8,8 +8,8 @@ from ..utils.compute_overlap import computeDiagOverlap
 
 class CenterProject(Project):
     def __init__(self, region_type='N8', pred_type='N42', config=None):
-        super(CenterProject,self).__init__(region_type = region_type,
-                                           pred_type = pred_type)
+        super(CenterProject, self).__init__(region_type=region_type,
+                                            pred_type=pred_type)
         self.config = config
         if self.config is None:
             from yacs.config import CfgNode as CN
@@ -126,4 +126,3 @@ def centerPoints(boxes):
     x_centers = np.mean(boxes[:, :, 0], axis=1)
     y_centers = np.mean(boxes[:, :, 1], axis=1)
     return np.stack([x_centers, y_centers], axis=-1)
-

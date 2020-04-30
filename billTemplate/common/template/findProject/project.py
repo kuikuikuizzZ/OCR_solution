@@ -18,14 +18,13 @@ class Project(object):
             raise ValueError('type %s is not in REGION_TYPE' % pred_type)
         self.region_type = REGION_TYPE[region_type]
         self.pred_type = REGION_TYPE[pred_type]
+
     def __call__(self):
         raise NotImplementedError('matcher __call__ method is not implemented')
 
 
 class FindProjects(object):
-    def __init__(self,
-                 project=None,
-                 config=defultConfig):
+    def __init__(self, project=None, config=defultConfig):
         if project is None:
             self.project = self.build_project(config)
         else:

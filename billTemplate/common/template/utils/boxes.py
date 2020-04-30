@@ -64,55 +64,60 @@ def warpedPoints(points, M):
     warped_points = cv2.perspectiveTransform(np.expand_dims(points, axis=0), M)
     return warped_points
 
-def boxesTypeTransform(inputs,inType,outType,**kwargs):
+
+def boxesTypeTransform(inputs, inType, outType, **kwargs):
     '''
     inputs: inputs array
     '''
-    if isinstance(inputs,np.ndarray):
+    if isinstance(inputs, np.ndarray):
         outputs = np.empty(inputs.shape)
     else:
         raise TypeError('inputs is not a numpy ndarray')
     if inType == "N4":
-        outputs = N4Transform(inputs,outType,**kwargs)
+        outputs = N4Transform(inputs, outType, **kwargs)
     elif inType == "N8":
-        outputs = N8Transform(inputs,outType,**kwargs)
+        outputs = N8Transform(inputs, outType, **kwargs)
     elif inType == "N42":
-        outputs = N42Transform(inputs,outType,**kwargs)
+        outputs = N42Transform(inputs, outType, **kwargs)
     elif inType == "N-12":
-        outputs = NM2Transform(inputs,outType,**kwargs)
-    else: 
+        outputs = NM2Transform(inputs, outType, **kwargs)
+    else:
         raise NotImplementedError('this input_type is not inplemented')
     return outputs
 
-def N4Transform(inputs,outType,**kwargs):
-    assert inputs.shape[1] == 4,'inputs shape not match inType N4'
-    if outType=='N8':
+
+def N4Transform(inputs, outType, **kwargs):
+    assert inputs.shape[1] == 4, 'inputs shape not match inType N4'
+    if outType == 'N8':
         outputs = rects2quads(inputs)
     else:
         raise NotImplementedError('outType %s for inType N4 is \
-                                  not inplemented'%(outType))
+                                  not inplemented' % (outType))
     return outputs
 
-def N8Transform(inputs,outType,**kwargs):
-    assert inputs.shape[1] == 8,'inputs shape not match inType N8'
-    if not True:
-        pass
-    else:
-        raise NotImplementedError('outType %s for inType %s is \
-                                  not inplemented'%(outType,inType))
-        
-def N42Transform(inputs,outType,**kwargs):
-    assert inputs.shape[1:] == (4,2),'inputs shape not match inType N42'
-    if not True:
-        pass
-    else:
-        raise NotImplementedError('outType %s for inType %s is \
-                                  not inplemented'%(outType,inType))
 
-def NM2Transform(inputs,outType,**kwargs):
-    assert inputs.shape[2] == 2,'inputs shape not match inType N-12'
+def N8Transform(inputs, outType, **kwargs):
+    assert inputs.shape[1] == 8, 'inputs shape not match inType N8'
     if not True:
         pass
     else:
         raise NotImplementedError('outType %s for inType %s is \
-                                  not inplemented'%(outType,inType))
+                                  not inplemented' % (outType, inType))
+
+
+def N42Transform(inputs, outType, **kwargs):
+    assert inputs.shape[1:] == (4, 2), 'inputs shape not match inType N42'
+    if not True:
+        pass
+    else:
+        raise NotImplementedError('outType %s for inType %s is \
+                                  not inplemented' % (outType, inType))
+
+
+def NM2Transform(inputs, outType, **kwargs):
+    assert inputs.shape[2] == 2, 'inputs shape not match inType N-12'
+    if not True:
+        pass
+    else:
+        raise NotImplementedError('outType %s for inType %s is \
+                                  not inplemented' % (outType, inType))

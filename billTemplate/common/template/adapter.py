@@ -63,4 +63,3 @@ def bounding_length(boxes, fixed_height=32):
     ratio = height / fixed_height
     width_rescale = width / ratio
     return width_rescale, fixed_height, width, height
-

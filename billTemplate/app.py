@@ -7,8 +7,11 @@ from flask_restful import Api
 from billTemplate.apis.v1alpha1.api import registry_resource
 
 parser = argparse.ArgumentParser(description='Process some integers.')
-parser.add_argument('-p','--port', type=int,
-                    default=9001,help='serving port')
+parser.add_argument('-p',
+                    '--port',
+                    type=int,
+                    default=9001,
+                    help='serving port')
 
 app = Flask(__name__)
 

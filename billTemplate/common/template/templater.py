@@ -4,11 +4,10 @@ from .mapping import TextBoxesMapping
 
 
 class TemplateImpl(object):
-    def __init__(self, refer_dict, target_dict, regex_dict={},
-                 config=None):
-        self.refer_dict = refer_dict 
-        self.target_dict = target_dict 
-        self.regex_dict = regex_dict 
+    def __init__(self, refer_dict, target_dict, regex_dict={}, config=None):
+        self.refer_dict = refer_dict
+        self.target_dict = target_dict
+        self.regex_dict = regex_dict
         self.refRegionDict = {}
         self.refRegionDict.update(refer_dict)
         self.refRegionDict.update(regex_dict)
@@ -17,15 +16,16 @@ class TemplateImpl(object):
         self.regexMatch = RegexMatcher(regex_dict.keys())
         self.referMatch = TextMatcher(refer_dict.keys())
         # projecter
-        if config is not None and config.get('project',None):
+        if config is not None and config.get('project', None):
             project_cfg = config['project']
-            self.project = CenterProject(region_type=project_cfg['region_type'],
-                                             pred_type=project_cfg['pred_type'])
+            self.project = CenterProject(
+                region_type=project_cfg['region_type'],
+                pred_type=project_cfg['pred_type'])
             self.findProject = FindProjects(project=self.project)
         else:
             self.project = CenterProject()
             self.findProject = FindProjects(project=self.project)
-        
+
         # mapper
         self.mapper = TextBoxesMapping()
 
