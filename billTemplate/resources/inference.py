@@ -65,7 +65,7 @@ class Inference(Resource):
         solution_json = request.values.get('solution')
         refer_dict, target_dict = self.decodeTemplate(solution_json)
         image = np.asarray(bytearray(image_file.read()), dtype="uint8")
-        image = cv2.imdecode(image, cv2.IMREAD_UNCHANGED)
+        image = cv2.imdecode(image, cv2.IMREAD_COLOR)
         pred_texts, pred_boxes = self.inferOps(image)
         tpi = TemplateImpl(refer_dict=refer_dict, target_dict=target_dict)
         mapping_dict = tpi(pred_texts, pred_boxes)
