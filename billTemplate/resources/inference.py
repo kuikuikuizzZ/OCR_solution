@@ -57,7 +57,7 @@ class Inference(Resource):
         try:
             result = self.inference()
         except Exception as e:
-            return str(e) + "\n inference is not finished."
+            return str(e) + "\n inference is not finished.",400
         return result
 
     def inference(self):
