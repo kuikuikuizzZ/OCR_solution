@@ -88,5 +88,5 @@ def drawText(image, box, text, size=20):
     #     setFont = ImageFont.truetype('', 20)
     dirname = os.path.dirname(__file__)
     Font = ImageFont.truetype(os.path.join(dirname, 'HYDaSongJ.ttf'), size)
-    draw.text((box[2], box[3]-size), text, font=Font, fill=fillColor)
+    draw.text((box[2], box[3] - size), text, font=Font, fill=fillColor)
     return np.array(image)
