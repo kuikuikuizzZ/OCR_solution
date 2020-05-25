@@ -4,7 +4,7 @@ from yacs.config import CfgNode as CN
 detect_path = "/tmp/snapshot/detect/craft-b3hw.onnx"
 recog_path = "/tmp/snapshot/recog/model300.onnx"
 
-width = 300
+width = 600
 path_cfg = dict(detect_path=detect_path, recog_path=recog_path)
 _C = CN(path_cfg, new_allowed=True)
 _C.model_cfg = CN()
