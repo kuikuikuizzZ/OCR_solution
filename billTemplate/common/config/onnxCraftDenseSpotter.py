@@ -1,8 +1,9 @@
 import os
+import glob
 from yacs.config import CfgNode as CN
 
-detect_path = "/tmp/snapshot/detect/craft-b3hw.onnx"
-recog_path = "/tmp/snapshot/recog/model300.onnx"
+detect_path = glob.glob("/tmp/snapshot/detect/*.onnx")[0]
+recog_path = glob.glob("/tmp/snapshot/recog/*.onnx")[0]
 
 width = 600
 path_cfg = dict(detect_path=detect_path, recog_path=recog_path)

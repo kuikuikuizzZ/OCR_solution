@@ -25,6 +25,9 @@ class ONNXDensenetRecognizer(object):
         else:
             self.config = config
         self.config['width'] = width
+        if rt.get_device() == "GPU":
+            self.config["device"] = "GPU"
+
     def predict_batch(self, img_list):
         return self._predict_batch(img_list)
 
@@ -47,7 +50,7 @@ class ONNXDensenetRecognizer(object):
         height = self.config['height']
         width = self.config['width']
         batch = int(self.config['batch_size'])
-        if self.config['device'] == 'gpu':
+        if self.config['device'] == 'GPU':
             length_imgs = len(img_list)
             if length_imgs > batch:
                 batch = 2 << (int(np.log2(length_imgs)))
