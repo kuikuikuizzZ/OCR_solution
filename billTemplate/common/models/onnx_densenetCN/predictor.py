@@ -14,6 +14,7 @@ characters = keys.alphabet_union[1:] + '卐'
 class ONNXDensenetRecognizer(object):
     def __init__(self, onnx_path, config=None, **kwargs):
         self.sess = rt.InferenceSession(onnx_path)
+        width = self.sess.get_inputs()[0].shape[2]
         if config is None:
             self.config = dict(height=32,
                                width=300,
@@ -23,7 +24,7 @@ class ONNXDensenetRecognizer(object):
                                device='cpu')
         else:
             self.config = config
-
+        self.config['width'] = width
     def predict_batch(self, img_list):
         return self._predict_batch(img_list)
 

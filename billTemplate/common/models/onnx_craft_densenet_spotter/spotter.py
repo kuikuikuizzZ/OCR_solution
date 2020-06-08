@@ -17,11 +17,12 @@ class ONNXCraftDensenetSpotter(object):
             self.recognizer_cfg = config.recognizer
             self.detector_cfg = config.detector
             self.adapter_cfg = config.adapter
-        self.config = config
 
+        self.config = config
         self.detector = ONNXCraft(detect_path, config=self.detector_cfg)
         self.recognizer = ONNXDensenetRecognizer(recog_path,
                                                  config=self.recognizer_cfg)
+        self.adapter_cfg.output_size = (self.recognizer_cfg['width'],32)
         self.adapter = RRect2FixHeightAdapter(**self.adapter_cfg)
 
     def __call__(self, image):
