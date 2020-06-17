@@ -73,3 +73,21 @@ def cvt2HeatmapImg(img):
     img = (np.clip(img, 0, 1) * 255).astype(np.uint8)
     img = cv2.applyColorMap(img, cv2.COLORMAP_JET)
     return img
+
+def equalizeHist(image):
+    (b,g,r) = cv2.split(image) #通道分解
+    bH = cv2.equalizeHist(b)
+    gH = cv2.equalizeHist(g)
+    rH = cv2.equalizeHist(r)
+    image = cv2.merge((bH,gH,rH),)#通道合成
+    return image
+
+def equalizeHistCLAHE(image):
+    (b,g,r) = cv2.split(image) #通道分解
+    tileGridSize = max(image.shape)//64
+    clahe = cv2.createCLAHE(clipLimit=5.0, tileGridSize=(tileGridSize,tileGridSize))
+    bH = clahe.apply(b)
+    gH = clahe.apply(g)
+    rH = clahe.apply(r)
+    image = cv2.merge((bH,gH,rH),)
+    return image

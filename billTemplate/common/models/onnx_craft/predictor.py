@@ -21,6 +21,7 @@ class ONNXCraft(object):
             self.config = config
 
     def detect(self, image):
+        image = imgproc.equalizeHist(image)
         img_resized, target_ratio, size_heatmap =  \
                 imgproc.resize_aspect_ratio(image,
                                             self.config['canvas_size'],
