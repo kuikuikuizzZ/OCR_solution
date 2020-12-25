@@ -139,7 +139,6 @@ cython_debug/
 
 # unused dir
 notebook
-sample
 snapshot
 extension_modules
 

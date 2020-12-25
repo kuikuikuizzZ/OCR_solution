@@ -12,14 +12,14 @@ from yacs.config import CfgNode as CN
 from common.models.onnx_craft_densenet_spotter import ONNXCraftDensenetSpotter
 from common.template.templater import TemplateImpl
 
-default_cfg = CN(new_allowed=True)
+default_config = CN(new_allowed=True)
 dir_path = os.path.dirname(os.path.dirname(__file__))
 config_path = os.path.join(dir_path, 'common/config/onnxCraftDenseSpotter.py')
-default_cfg.merge_from_file(config_path)
+default_config.merge_from_file(config_path)
 
 
 class InferenceImpl(object):
-    def __init__(self, config=default_cfg):
+    def __init__(self, config=default_config):
         detect_path = config.detect_path
         recog_path = config.recog_path
         self.model = ONNXCraftDensenetSpotter(detect_path=detect_path,
@@ -34,7 +34,7 @@ class InferenceImpl(object):
         return self.model.healthful()
 
 
-inferOps = InferenceImpl(config=default_cfg)
+inferOps = InferenceImpl(config=default_config)
 
 
 class InferenceHealth(Resource):
@@ -46,7 +46,7 @@ class InferenceHealth(Resource):
 
 
 class Inference(Resource):
-    def __init__(self, config=default_cfg):
+    def __init__(self, config=default_config):
         self.config = config
         self.inferOps = inferOps
 
