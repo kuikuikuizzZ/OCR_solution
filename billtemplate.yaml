@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: billtemplate-deployment
+spec:
+  selector:
+    matchLabels:
+      app: billtemplate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: billtemplate
+    spec:
+      containers:
+      - args:
+        - --port 8080
+        image: clv-dev.cargo.io/release/solution-billtemplate:v2.0
+        name: manager
+        env:
+          - name: DETECT_DIR
+            value: "/tmp/snapshot/detect" # 模型地址 "/tmp/snapshot/detect/xxx.onnx"
+          - name: RECOG_DIR
+            value: "/tmp/snapshot/recog"
+        resources:
+          limits:
+            cpu: 2
+            memory: 4000Mi 
+          requests:
+            cpu: 2
+            memory: 3000Mi
+      terminationGracePeriodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: billtemplate
+  name: billtemplate-service
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: billtemplate
+  sessionAffinity: None
+  type: NodePort
