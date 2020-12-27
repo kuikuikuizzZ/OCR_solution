@@ -5,7 +5,6 @@ import argparse
 from flask import Flask
 from flask_restful import Api
 from billTemplate.apis.v1alpha1.api import registry_resource
-from billTemplate.resources import default_config
 
 parser = argparse.ArgumentParser(description='Process some integers.')
 parser.add_argument('-p',
