@@ -1,5 +1,5 @@
 numpy
-opencv-python==3.4.2.17
+opencv-python==4.2.0.32
 yacs==0.1.6
 flask==1.1.2
 flask_restful==0.3.8
